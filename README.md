@@ -21,3 +21,12 @@ Klaatu barada neck tie!
 - [ ] slack
 - [ ] enabler
 - [ ] jenkins
+
+## Front-End
+- [Forking](./front-end/forking.md)
+- GitHub
+    - [Labels](./front-end/github/labels.md)
+    - [Milestones](./front-end/github/milestones.md)
+
+## Sysops
+- [Environments](./sysops/environments.md)
