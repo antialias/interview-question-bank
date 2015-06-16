@@ -1,14 +1,14 @@
 # Environments
 * in office
-** dev
-** qa
+ * dev
+ * qa
 
 * in rackspace
-** stage
-** production
+ * stage
+ * production
 
 * fruit servers
-** perishable fruits
+ * perishable fruits
 
 * on demand environments
-** team servers
+ * team servers
