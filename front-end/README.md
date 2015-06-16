@@ -1,5 +1,9 @@
 # Front-End
 
+GitHub
+  - [Milestones](/github/milestones.md)
+  - [Labels](./github/labels.md)
+
 ## Todo
 - [ ] Branching strategy
 - [ ] service environments
