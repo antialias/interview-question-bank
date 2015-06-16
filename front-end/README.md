@@ -8,7 +8,6 @@
 - [ ] mechagodzilla
 - [ ] helper
 - [ ] vpn
-- [ ] github labels
 - [ ] clump
 - [ ] webpack
 - [ ] shrinkwrap 
