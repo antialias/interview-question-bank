@@ -1,4 +1,4 @@
-# necrodibsicon
+# NecroDibsicon
 Klaatu barada neck tie!
 
 ## 1stdibs Engineering Docs
