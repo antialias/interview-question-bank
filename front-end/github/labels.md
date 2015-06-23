@@ -6,3 +6,4 @@
 * `milestone tbd` - The release date for these changes have not been decided on
 * `release branch` - For cutman usage only. For a PR from `release` to `master`
 * `reviewed` - The PR has already been code reviewed and is waiting to be merged for some other reason (maybe still needs UAT, maybe needs a release branch to be cut)
+* `untied` - if code can go out without any milestone, typically dealer storefronts (.com repo) or static repo 
