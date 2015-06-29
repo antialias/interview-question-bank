@@ -27,6 +27,7 @@ Klaatu barada neck tie!
 - GitHub
     - [Labels](./front-end/github/labels.md)
     - [Milestones](./front-end/github/milestones.md)
+    - [Pull Requests](./front-end/github/pull-requests.md)
 
 ## Sysops
 - [Environments](./sysops/environments.md)
