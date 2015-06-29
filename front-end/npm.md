@@ -24,7 +24,7 @@ The --save(-dev) flags will tell npm to add the package to the dependencies in p
 
 Do this if you think some packages may be broken but you don't know which one(s):
 
-<code>npm run clean && npm install</code>
+<code>npm run cleaninstall</code>
 
 ## npm gotchas
 - This is more of an issue with gulp/webpack on macs, but make sure that if you include the following in your <code>~/.bash_profile</code>:
