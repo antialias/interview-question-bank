@@ -22,7 +22,7 @@ The --save(-dev) flags will tell npm to add the package to the dependencies in p
 
 ### Clean Install
 
-Do this if you think some packages may be broken but you don't know which one(s):
+Do this if you think some packages may be broken but you don't know which one(s) (Note: This only works on .com and adminv2):
 
 <code>npm run cleaninstall</code>
 
