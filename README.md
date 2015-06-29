@@ -13,10 +13,12 @@ Klaatu barada neck tie!
 
 ## Sysops
 - [Environments](./sysops/environments.md)
+- [Sagan/Fruit Servers](./sysops/sagan/)
 
 ## Todo
 - [ ] Branching strategy
-- [ ] Sagan
+- [ ] service environments
+- [ ] mothra
 - [ ] mechagodzilla
 - [ ] helper
 - [ ] vpn
