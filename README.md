@@ -5,9 +5,20 @@ Klaatu barada neck tie!
 
 <img src="./assets/images/necrodibsicon.gif" />
 
+
+## Front-End
+- [Forking](./front-end/forking.md)
+- GitHub
+    - [Branching](./front-end/git-branching.md)
+    - [Labels](./front-end/github/labels.md)
+    - [Milestones](./front-end/github/milestones.md)
+    - [Pull Requests](./front-end/github/pull-requests.md)
+
+## Sysops
+- [Environments](./sysops/environments.md)
+
 ## Todo
 - [ ] Branching strategy
-- [ ] service environments
 - [ ] Sagan/fruit servers
 - [ ] mothra
 - [ ] mechagodzilla
@@ -21,14 +32,3 @@ Klaatu barada neck tie!
 - [ ] slack
 - [ ] enabler
 - [ ] jenkins
-
-## Front-End
-- [Forking](./front-end/forking.md)
-- GitHub
-    - [Branching](./front-end/git-branching.md)
-    - [Labels](./front-end/github/labels.md)
-    - [Milestones](./front-end/github/milestones.md)
-    - [Pull Requests](./front-end/github/pull-requests.md)
-
-## Sysops
-- [Environments](./sysops/environments.md)
