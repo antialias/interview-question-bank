@@ -10,7 +10,7 @@
  - The engineer has finished working on this ticket in his branch. It is now time for the product manager to UAT the ticket.
  - The engineer will update the ticket status to "Ready For UAT" and assign to the relevant product manager. The engineer will inform the product manager that this work is ready for uat.
  - The engineer will also open a Pull Request so code review can begin
- - The work will be be reviewed by the product manager either on a fruit server or locally on the engineer's devbox. The product manager is looking to ensure that the feature has been implemented as described.
+ - The work will be be reviewed by the product manager either on a fruit server or locally on the engineer's [devbox](../front-end/devbox.md). The product manager is looking to ensure that the feature has been implemented as described.
  - This step may be skipped for bug fixes or tiny changes
 1. In Review and assigned to the engineer
  - After UAT is complete, the product manager will assign the ticket back to the engineer implementing the feature. 
