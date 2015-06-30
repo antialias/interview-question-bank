@@ -15,7 +15,7 @@ Klaatu barada neck tie!
 
 ## Todo
 - [ ] Branching strategy
-- [ ] Sagan/fruit servers
+- [ ] Sagan
 - [ ] mothra
 - [ ] mechagodzilla
 - [ ] helper
