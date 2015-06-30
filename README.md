@@ -5,6 +5,8 @@ Klaatu barada neck tie!
 
 <img src="./assets/images/necrodibsicon.gif" />
 
+## General
+- [Jira](./general/jira.md)
 
 ## Front-End
 - [Forking](./front-end/forking.md)
