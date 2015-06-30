@@ -3,7 +3,7 @@
 GitHub
   - [Milestones](/github/milestones.md)
   - [Labels](./github/labels.md)
- 
-Javascript
-  - [npm](./npm.md)
 
+Other stuff
+- [npm](./npm.md)
+- [environments](../sysops/environments.md)
