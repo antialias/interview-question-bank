@@ -7,6 +7,7 @@ Klaatu barada neck tie!
 
 ## General
 - [Jira](./general/jira.md)
+- [Mothra](./general/mothra.md)
 
 ## [Front-End](./front-end/)
 
@@ -16,7 +17,6 @@ Klaatu barada neck tie!
 ## Todo
 - [ ] Branching strategy
 - [ ] Sagan
-- [ ] mothra
 - [ ] mechagodzilla
 - [ ] helper
 - [ ] vpn
