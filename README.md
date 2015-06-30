@@ -8,13 +8,7 @@ Klaatu barada neck tie!
 ## General
 - [Jira](./general/jira.md)
 
-## Front-End
-- [Forking](./front-end/forking.md)
-- GitHub
-    - [Branching](./front-end/git-branching.md)
-    - [Labels](./front-end/github/labels.md)
-    - [Milestones](./front-end/github/milestones.md)
-    - [Pull Requests](./front-end/github/pull-requests.md)
+## [Front-End](./front-end/)
 
 ## Sysops
 - [Environments](./sysops/environments.md)
