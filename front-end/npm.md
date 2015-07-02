@@ -29,6 +29,6 @@ Do this if you think some packages may be broken but you don't know which one(s)
 ## npm gotchas
 - This is more of an issue with gulp/webpack on macs, but make sure that if you include the following in your <code>~/.bash_profile</code>:
 	
-		<code>ulimit -S -n 2048</code>
+		ulimit -S -n 2048
 		
 	(This raises the limit on the number of open files a process can have at the same time)
