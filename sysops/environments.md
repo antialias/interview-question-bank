@@ -29,8 +29,8 @@ are used for front end team to make code available outside of your [devbox](../f
 
 You can see all built fruit servers in the sagan directory: http://sagan.intranet.1stdibs.com/directory
 
-## Team/vegetable servers
-are complete environments on AWS. Each team has one (money.intranet.1stdibs.com, finding.intranet.1stdibs.com, etc). They have their own server stack, database, and front end. Front end can be built using the "any fruit server" jenkins job.
+## team/vegetable servers
+These are complete environments on AWS. Each team has one (money.intranet.1stdibs.com, finding.intranet.1stdibs.com, etc). They have their own server stack, database, and front end. Front end can be built using the "any fruit server" jenkins job.
 
 ## thiswillchargeyou
-Is another complete environment on AWS. Like the other team/vegetable servers it has its own service layer and test database. The difference is that it uses our PRODUCTION braintree account. Purchases made on thiswillchargeyou will actually charge your credit card! Be careful! We use this environment to test payments methods like PayPal.
+thiswillchargeyou.intranet.1stdibs.com is another complete environment on AWS. Like the other team/vegetable servers it has its own service layer and test database. The difference is that it uses our PRODUCTION braintree account. Purchases made on thiswillchargeyou will actually charge your credit card! Be careful! We use this environment to test payments methods like PayPal.
