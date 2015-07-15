@@ -1,8 +1,10 @@
+[preserve-merges]: http://stackoverflow.com/questions/15915430/what-exactly-does-gits-rebase-preserve-merges-do-and-why
+
 # Rebasing your branch
 
 ## More in-depth explanation
 
-This is an [in-depth presentation](/assets/pdfs/thomas-git.pdf) [Thomas](https://github.com/antialias/) about git which contains more information about rebasing (amongst other git features).
+This is an [in-depth git presentation](/assets/pdfs/thomas-git.pdf) [Thomas](https://github.com/antialias/) gave which contains more information about rebasing (amongst other git features).
 
 ## What is rebasing?
 
@@ -13,9 +15,9 @@ When you rebase, you are changing the parent commit of your branch. In order to 
 
 ## Why rebase? 
 
-Whenever you branch is in conflict with the target branch, you need to get it up to date. A merge can be suffice to handle that. So then why bother rebasing? Two reasons come up:
+Whenever your branch is in conflict with the target branch, you need to get it up to date. A merge can handle that, sure, but here are two reasons why rebasing might be preferred over merging:
 
-1. Merge commits are removed.
+1. Merge commits are removed
 2. History is much easier to read
 
 ## Standard rebasing
@@ -25,10 +27,14 @@ Whenever you branch is in conflict with the target branch, you need to get it up
 Checkout `develop` (or the target branch) and get it up to date: 
 
 ```bash
-$ git pull --rebase upstream develop
+$ git pull upstream develop
 ```
 
-It is absolutely imperative that you the most updated version of develop (or the target branch). If you do not, then you can potentially remove files and commits that were completely unrelated to your feature branch.
+If you happen to have local commits on a shared branch, you should use the `--rebase` flag:
+
+```bash
+$ git pull --rebase upstream <branch>
+```
 
 ### Replay your changes on top of the target branch
 
@@ -39,8 +45,23 @@ $ git checkout feature-branch
 $ git rebase develop
 ```
 
-Fix any conflicts as they come along. Rebasing is replaying all of your commits so that they eventually get clumped together once it's done.
-If you get a conflict, it's advisable to use `--conflict=diff3` so you can see your common ancestor of when your change split versus the current state of the file.
+Fix any conflicts as they come along.
+
+When rebasing your branch on top of a new parent commit, all the commits from the part of your branch being rebased are played on top of the new parent. During this process, any commits from merges are replayed as well, forming a perfectly linear commit history, devoid of any merge commits (unless the [--preserve-merges][preserve-merges] flag is used.)
+
+If you get a conflict, it's advisable to use `--conflict=diff3` so you can see your common ancestor of when your change split versus the current state of the file:
+
+```bash
+CONFLICT (content): Merge conflict in file.ext
+$ git checkout --conflict=diff3 file.ext
+```
+
+To avoid needing to pass this flag all the time, you can set this in your `.gitconfig` file instead:
+
+```text
+[merge]
+  conflictstyle = diff3
+```
 
 ### Update your remote branch
  
@@ -82,8 +103,8 @@ You can also squash multiple commits into one:
 
 ```bash
 pick aeb2b97 amazing bug fix
-s 6f0ab66 bs bug fix
-s 637e4fd meh, ok bug fix
+squash 6f0ab66 bs bug fix
+squash 637e4fd meh, ok bug fix
 ```
 
 After saving, git will start rebasing your commits and then bring you to a second screen:
@@ -106,12 +127,12 @@ At this state, you can modify the commit messages as you wish.
 
 ### Fixup
 
-However, if you know that one commit message will be suffice, you can use `fixup` (or `f`) instead to meld commits into the `pick`ed commit:
+However, if you know that one commit message will suffice, you can use `fixup` (or `f`) instead to meld commits into the `pick`ed commit:
 
 ```bash
 pick aeb2b97 amazing bug fix
-f 6f0ab66 bs bug fix
-f 637e4fd meh, ok bug fix
+fixup 6f0ab66 bs bug fix
+fixup 637e4fd meh, ok bug fix
 ```
 
 This will accomplish the same as using the `squash` command (indicated by `s`), but rather than letting you edit the message, it will end up using the `amazing bug fix` message for all three commits without going to a second screen.
