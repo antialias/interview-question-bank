@@ -1,11 +1,11 @@
 # Front-End
 
 GitHub
-  - [Git Branching](/github/git-branching.md)
+  - [Git Branching](./github/git-branching.md)
   - [Labels](./github/labels.md)
-  - [Milestones](/github/milestones.md)
+  - [Milestones](./github/milestones.md)
   - [Pull Requests (PRs)](./github/pull-requests.md)
-  - [Rebasing](/github/rebasing.md)
+  - [Rebasing](./github/rebasing.md)
 
 Other stuff
 - [npm](./npm.md)
