@@ -8,7 +8,7 @@ This is an [in-depth git presentation](/assets/pdfs/thomas-git.pdf) [Thomas](htt
 
 ## What is rebasing?
 
-_re_ – change
+_re_ – change  
 _base_ – a structure on which something draws or depends
 
 When you rebase, you are changing the parent commit of your branch. In order to accommodate this change, all the commits after the parent commit must be reconstructed.
