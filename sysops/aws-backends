@@ -1,0 +1,37 @@
+We have several EC2 servers which are acting as Fastly backend servers to handle content.  For instance Introspective Magazine https://www.1stdibs.com/introspective-magazine/.  In this case we have a Fastly backend host setup pointing to the public AWS Elastic IP 54.173.19.63.  Attached to this backend is a regex which matches against the URL path:
+
+```
+req.url ~ "^/introspective-magazine"
+```
+
+Server side is pretty straight forward, all we need to do is make sure the home folder is in 
+place and ensure we the correct docroot and alias setup:
+
+```
+ <VirtualHost *:80>
+     DocumentRoot /var/www/introspective/www/
+     ServerName www.1stdibs.com
+     ServerAlias 1stdibs.com
+     Alias /introspective-magazine/ /var/www/introspective/www/
+
+     IndexIgnore *
+
+     ErrorLog /data/logs/httpd/error_log
+     ErrorDocument 404 /notfound.html
+
+  <Directory /var/www/introspective/www/>
+    allowoverride all
+  </Directory>
+
+</VirtualHost>
+```
+
+We have the same setup for:
+
+
+**https://www.1stdibs.com/blogs/the-study/**  
+**https://ww2.1stdibs.com/introspective-magazine/** //Introspective Staging  
+**https://ww2.1stdibs.com/blogs/the-study/**  //The Study Staging  
+**https://www.1stdibs.com/product_feeds/** (will be deployed in August 2015)  
+**https://www.1stdibs.com/sitemaps/**  (will be deployed in August 2015)  
+
