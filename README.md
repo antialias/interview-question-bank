@@ -9,6 +9,7 @@ Klaatu barada neck tie!
 - [Jira](./general/jira.md)
 - [Mothra](./general/mothra.md)
 - [Dibsy](./general/dibsy.md)
+- [Datamatics Integration](./general/datamatics/datamatics.md)
 
 ## [Front-End](./front-end/)
 
@@ -31,4 +32,3 @@ Klaatu barada neck tie!
 - [ ] slack
 - [ ] enabler
 - [ ] jenkins
-- [ ] datamatics
