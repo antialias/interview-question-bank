@@ -1,0 +1,31 @@
+The unifi Wifi controller is located here, it's a vmware server on the esx2 hardware:
+
+**https://192.168.100.197:8443**  
+**user:admin**  
+**pass:1stdibs123!**  
+
+
+There are older versions located in:
+
+https://192.168.100.198:8443 (Ubuntu Vmware server running over version)  
+https://192.168.100.110:8443 (windows/quickbooks server)
+
+Any of the wifi access points are accessible via ssh using the above mentioned credentials.  If they happen to drop offline and lose their config the default **user/pass is ubnt/ubnt**.  A few helpful commands to bring the WAPs online if they are being problematic:
+
+Login through ssh and access the **mca-cli** util:
+
+BZ.v3.2.12**# mca-cli**  
+UniFi**# set-inform https://192.168.100.197:8080/set-inform**   
+
+If this is a new WAP you will need to access the admin utilty at this point and "accept" the new WAP for management.  If you're trying to revive a failed device you can monitor the admin panel to see if the state transitions from Disconnected->Provisioning->Connected.  
+
+You can also run the **'set-inform'** command directly in the ssh session, however I've found the results have been better when running under the **'mca-cli'** shell.  **The WAPs have a known issue** where they can periodically become disconnected and cannot communicate with the controller.  You can see this in the output of **/var/log/messages** which can be helpful when debugging. One helpful trick to overcome this is the modify the** /etc/hosts **file and create a temporary dns entry for 'unifi' pointing to the controller IP:
+
+BZ.v3.2.12**# cat /etc/hosts**  
+**127.0.0.1	localhost.localdomain	localhost  
+192.168.100.197 unifi**  
+
+After you save the hosts file and if you start tailing /var/log/messages you SHOULD see improved results.  
+
+#### Current Site
+Under the current site in the top left corner there are two sites **'51AstorPlace'** and **'51AstorPlace-failover'**.  The idea is that we can apply different policies/configurations and move WAPs between each site with minimal downtime.  At the time of this writing(2015.08.04) all the WAPs are located within **'51AstorPlace-failover'.**  
