@@ -28,13 +28,11 @@ This diagram from datamatics attempts to make clear from where the data is being
 
 Here are the URLs (with schemes, hosts, paths):
 
-##### `https://admin.1stdibs.com/citysearch-administration/photo_processing/returnlogin.php`
+1. `https://admin.1stdibs.com/citysearch-administration/photo_processing/returnlogin.php`
+	* set as the referrer on their client for some reason
 
-Note: this is set as the referrer on their client for some reason.
-
-##### `https://adminv2.1stdibs.com/login/internal`
-
-There is a POST of this data to this URL in order to get logged in:
+2. `https://adminv2.1stdibs.com/login/internal`
+	* table below is data POST'd in order to login
 
 | field    | value                         |
 |----------|-------------------------------|
@@ -42,14 +40,13 @@ There is a POST of this data to this URL in order to get logged in:
 | password | e.g.: india123                |
 | do-login | 1                             |
 
-##### `https://admin.1stdibs.com/citysearch-administration/photo_processing/i_view.php`
+3.  `https://admin.1stdibs.com/citysearch-administration/photo_processing/i_view.php`
+	* the URL that they then load and start scraping.
 
-This is the URL that they then load and start scraping.
-
-##### `https://admin.1stdibs.com/citysearch-administration/photo_processing/i_view.php?status=-32&start=0&rows= + _pageSize + &proc_user_view= + UserName`
-
-`_pageSize` is derived from scaping the previous i_view.php page and `Username` is the email login name (sans the @ and the host).
-
+4. `https://admin.1stdibs.com/citysearch-administration/photo_processing/i_view.php?status=-32&start=0&rows= + _pageSize + &proc_user_view= + UserName`
+	* `_pageSize` is derived from scaping the previous i_view.php page and `Username` is the email login name (sans the @ and the host).
+	
+	 
 See [datamatics_scraping_source.cs](datamatics_scraping_source.cs) for the full source code of their download scraping tool (it's a doozy).
 
 ### upload tk
