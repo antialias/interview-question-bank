@@ -22,7 +22,9 @@ This is the data that they scrape from `/citysearch-administration/photo_process
 * number of items
 * upload URL (this is derived from the 'original' URL link on the i_view page; see below)
 
-See this diagram for more details on where each of those data points comes from.
+This diagram from datamatics attempts to make clear from where the data is being scraped.
+
+![i_view page][iview-diagram]
 
 Here are the URLs (with schemes, hosts, paths):
 
@@ -56,3 +58,4 @@ See [datamatics_scraping_source.cs](datamatics_scraping_source.cs) for the full 
 
 
 [flow-diagram]: https://github.com/1stdibs/necrodibsicon/blob/master/general/datamatics/datamatics-flow.jpg?raw=true "datamatics flow"
+[iview-diagram]: https://github.com/1stdibs/necrodibsicon/blob/master/general/datamatics/i-view-data.png?raw=true "i_view.php"
