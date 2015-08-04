@@ -23,14 +23,13 @@ This is the data that they scrape from `/citysearch-administration/photo_process
 
 See this diagram for more details on where each of those data points comes from.
 
-
 Here are the URLs (with schemes, hosts, paths):
 
-#### > `https://admin.1stdibs.com/citysearch-administration/photo_processing/returnlogin.php`
+##### `https://admin.1stdibs.com/citysearch-administration/photo_processing/returnlogin.php`
 
 Note: this is set as the referrer on their client for some reason.
 
-#### > `https://adminv2.1stdibs.com/login/internal`
+##### `https://adminv2.1stdibs.com/login/internal`
 
 There is a POST of this data to this URL in order to get logged in:
 
@@ -40,12 +39,11 @@ There is a POST of this data to this URL in order to get logged in:
 | password | e.g.: india123                |
 | do-login | 1                             |
 
-#### > `https://admin.1stdibs.com/citysearch-administration/photo_processing/i_view.php`
+##### `https://admin.1stdibs.com/citysearch-administration/photo_processing/i_view.php`
 
 This is the URL that they then load and start scraping.
 
-
-#### > `https://admin.1stdibs.com/citysearch-administration/photo_processing/i_view.php?status=-32&start=0&rows= + _pageSize + &proc_user_view= + UserName`
+##### `https://admin.1stdibs.com/citysearch-administration/photo_processing/i_view.php?status=-32&start=0&rows= + _pageSize + &proc_user_view= + UserName`
 
 `_pageSize` is derived from scaping the previous i_view.php page and `Username` is the email login name (sans the @ and the host).
 
