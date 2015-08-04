@@ -20,6 +20,7 @@ This is the data that they scrape from `/citysearch-administration/photo_process
 * photo processor notes
 * dealer notes
 * number of items
+* upload URL (this is derived from the 'original' URL link on the i_view page; see below)
 
 See this diagram for more details on where each of those data points comes from.
 
