@@ -2,4 +2,5 @@
 
 - [General Git](./git.md)
 - [Jira](./jira.md)
-- [Mothra](./mothra.md)
+- [BeastMaster](./beastmaster.md)
+  - [Mothra](./mothra.md)
