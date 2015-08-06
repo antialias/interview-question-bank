@@ -16,6 +16,7 @@ Klaatu barada neck tie!
 ## Sysops
 - [Environments](./sysops/environments.md)
 - [Sagan/Fruit Servers](./sysops/sagan/)
+- [Jenkins Build](./sysops/jenkins/)
 
 ## Todo
 - [ ] Branching strategy
@@ -26,8 +27,8 @@ Klaatu barada neck tie!
 - [ ] vpn
 - [ ] clump
 - [ ] webpack
-- [ ] shrinkwrap 
-- [ ] bridgekeeper 
+- [ ] shrinkwrap
+- [ ] bridgekeeper
 - [ ] kegbot
 - [ ] slack
 - [ ] enabler
