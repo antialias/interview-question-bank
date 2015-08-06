@@ -104,10 +104,8 @@ public int UploadImages(string FolderPath, UploadType uploadType, System.Windows
                             string responseResize = Encoding.UTF8.GetString(responseResizeBytes);
                             ResizedImage imgResized = ResizedImage.GetResizedImage(responseResize);
 
-
-
-
-                            string medium = imgResized.image1.medium;                                    string small = imgResized.image1.small;
+                            string medium = imgResized.image1.medium;                                    
+							string small = imgResized.image1.small;
                             //4.	Save the newly updated image sequences (PUT)
                             List<Image> images = null;
                             if (curSequence.result.furnitureItem.images != null)
@@ -279,283 +277,283 @@ public int UploadImages(string FolderPath, UploadType uploadType, System.Windows
 
 //Upload process for fashion & Jewelry
 public int UploadImagesFashionJewelry(string FolderPath, string Vertical, System.Windows.Forms.Label lblStatus = null)
+{
+    string detectedVertical = Vertical;
+    string loggedinUserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+    //login
+    int successfullyProcessed = 0;
+    CookieContainer cookieJar = new CookieContainer();
+    WebClientX client = new WebClientX(cookieJar, false);
+
+    NameValueCollection postData = new NameValueCollection();
+    postData.Add("email", UserName);
+    postData.Add("password", Password);
+    postData.Add("do-login", "1");
+
+    byte[] responseBytes = client.UploadValues(_login_url_topost, postData);//login
+    string response = Encoding.UTF8.GetString(responseBytes);
+
+    CQ loggedInDom = response;
+    CQ passwordbox = loggedInDom.Find("[type=\"password\"][name=\"password\"]");
+    if (passwordbox.Length == 0)
+    {
+        DirectoryInfo diFolder = new DirectoryInfo(FolderPath);
+        IEnumerable<FileInfo> imageFiles = from p in diFolder.GetFiles("*.*", SearchOption.AllDirectories)
+                                           where (p.Extension.ToLower() == ".jpg") || (p.Extension.ToLower() == ".jpeg")
+                                           select p;
+        int counter = 0;
+        int total = imageFiles.Count();
+        if (total > 0) //upload images 1 by 1
         {
-            string detectedVertical = Vertical;
-            string loggedinUserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-            //login
-            int successfullyProcessed = 0;
-            CookieContainer cookieJar = new CookieContainer();
-            WebClientX client = new WebClientX(cookieJar, false);
-
-            NameValueCollection postData = new NameValueCollection();
-            postData.Add("email", UserName);
-            postData.Add("password", Password);
-            postData.Add("do-login", "1");
-
-            byte[] responseBytes = client.UploadValues(_login_url_topost, postData);//login
-            string response = Encoding.UTF8.GetString(responseBytes);
-
-            CQ loggedInDom = response;
-            CQ passwordbox = loggedInDom.Find("[type=\"password\"][name=\"password\"]");
-            if (passwordbox.Length == 0)
+            client = new WebClientX(cookieJar, true);
+            string userToken = null;
+            foreach (FileInfo imageFile in imageFiles)
             {
-                DirectoryInfo diFolder = new DirectoryInfo(FolderPath);
-                IEnumerable<FileInfo> imageFiles = from p in diFolder.GetFiles("*.*", SearchOption.AllDirectories)
-                                                   where (p.Extension.ToLower() == ".jpg") || (p.Extension.ToLower() == ".jpeg")
-                                                   select p;
-                int counter = 0;
-                int total = imageFiles.Count();
-                if (total > 0) //upload images 1 by 1
+                counter++;
+                string ItemID = Path.GetFileNameWithoutExtension(imageFile.FullName).Trim();
+                string[] ItemDetails = ImageDetailsRepository.GetItemKeyAndIsUploaded(ItemID);
+                if (!string.IsNullOrWhiteSpace(ItemDetails[0]))
                 {
-                    client = new WebClientX(cookieJar, true);
-                    string userToken = null;
-                    foreach (FileInfo imageFile in imageFiles)
+                    string ItemKey = ItemDetails[0];
+
+                    if (Vertical.ToLower() == "fashion")
                     {
-                        counter++;
-                        string ItemID = Path.GetFileNameWithoutExtension(imageFile.FullName).Trim();
-                        string[] ItemDetails = ImageDetailsRepository.GetItemKeyAndIsUploaded(ItemID);
-                        if (!string.IsNullOrWhiteSpace(ItemDetails[0]))
+                        if (!ItemKey.ToLower().StartsWith("v_"))
                         {
-                            string ItemKey = ItemDetails[0];
+                            throw new Exception("Please select correct vertical for jewelry item batch");
+                        }
+                    }
 
-                            if (Vertical.ToLower() == "fashion")
+                    if (Vertical.ToLower() == "jewelry")
+                    {
+                        if (!ItemKey.ToLower().StartsWith("j_"))
+                        {
+                            throw new Exception("Please select correct vertical for fashion item batch");
+                        }
+                    }
+
+                    bool IsUploaded = Convert.ToBoolean(ItemDetails[1]);
+                    if (!IsUploaded)
+                    {
+                        string UploadPageUrl = ConfigurationManager.AppSettings["UploadURL"] + ItemKey;
+                        string uploadPage = string.Empty;
+                        try
+                        {
+                            if (userToken == null)
                             {
-                                if (!ItemKey.ToLower().StartsWith("v_"))
-                                {
-                                    throw new Exception("Please select correct vertical for jewelry item batch");
-                                }
+                                uploadPage = client.DownloadString(UploadPageUrl);
+
+    							userToken = (from p in
+                                     cookieJar.GetCookies(new Uri("https://www.1stdibs.com")).Cast<Cookie>()
+                                     where p.Name.Equals("userToken")
+                                     select p.Value).FirstOrDefault();
                             }
 
-                            if (Vertical.ToLower() == "jewelry")
+                            if (string.IsNullOrWhiteSpace(uploadPage))
                             {
-                                if (!ItemKey.ToLower().StartsWith("j_"))
-                                {
-                                    throw new Exception("Please select correct vertical for fashion item batch");
-                                }
+                                uploadPage = client.DownloadString(UploadPageUrl);
                             }
 
-                            bool IsUploaded = Convert.ToBoolean(ItemDetails[1]);
-                            if (!IsUploaded)
+                            CQ uploadPageDom = uploadPage;
+
+                            //get seller id
+                            //1.	Get current image sequence & extract seller id (GET)
+                            string getSequenceURL = string.Format(AppSettings.GetSequenceURL, Vertical.ToLower(),
+                                ItemID, userToken);
+
+                            string curSequenceJSON = client.DownloadString(getSequenceURL);
+
+                            JsonReader jsonReaderX = new JsonTextReader(new StringReader(curSequenceJSON)) { DateParseHandling = DateParseHandling.None };
+                            dynamic curSequence = JObject.Load(jsonReaderX);
+
+                            dynamic curItem = null;
+                            switch (Vertical)
                             {
-                                string UploadPageUrl = ConfigurationManager.AppSettings["UploadURL"] + ItemKey;
-                                string uploadPage = string.Empty;
+                                case "fashion":
+                                    curItem = curSequence.result.fashionItem;
+                                    if (curItem == null)
+                                    {
+                                        detectedVertical = "jewelry";
+                                        curItem = curSequence.result.jewelryItem;
+                                    }
+                                    break;
+                                case "jewelry":
+                                    curItem = curSequence.result.jewelryItem;
+                                    break;
+                            }
+
+                            bool uploadSuccess = false;
+                            AcceptedImageList lstUploaded = null;
+                            try
+                            {
+                                //2.	Upload image to server (POST)
+                                string ImageuploadURL = string.Format(AppSettings.ImageUploadURL, curItem.seller.id);
+
+								byte[] uploadFileResponseBytes = client.UploadFile(ImageuploadURL, "POST", imageFile.FullName); //pick file from same directory
+                                string uploadFileResponse = Encoding.UTF8.GetString(uploadFileResponseBytes);
+
+
+                                lstUploaded = AcceptedImageList.GetItemDetails(uploadFileResponse);
+
+                                if (lstUploaded.status.Equals("success",
+                                    StringComparison.InvariantCultureIgnoreCase))
+                                    uploadSuccess = true;
+                            }
+                            catch (Exception ex)
+                            {
+                                WriteMessageToFile(ItemID + "-" + ex.Message);
+                                WriteMessageToFile("File upload failed, " + ex.Message,
+                                    System.Diagnostics.TraceEventType.Error);
+                            }
+
+                            if (uploadSuccess)
+                            {
+                                string original = lstUploaded.accepted[0].original;
+                                string thumb = lstUploaded.accepted[0].thumb;
+                                string large = lstUploaded.accepted[0].large;
+
+                                //3.	Get small and medium images (POST)
+                                string resizeImageURL =
+                                    "https://adminv2.1stdibs.com/image/ajax/ajax_dealer_resize_images";
+                                NameValueCollection resizeParams = new NameValueCollection();
+                                resizeParams.Add("images[image1][web_url]", lstUploaded.accepted[0].large);
+                                byte[] responseResizeBytes = client.UploadValues(resizeImageURL, resizeParams);
+                                //login
+                                string responseResize = Encoding.UTF8.GetString(responseResizeBytes);
+                                ResizedImage imgResized = ResizedImage.GetResizedImage(responseResize);
+
+                                string medium = imgResized.image1.medium;
+                                string small = imgResized.image1.small;
+                                //4.	Save the newly updated image sequences (PUT)
+                                dynamic images = null;
+                                if (curItem.images != null)
+                                {
+                                    images = curItem.images;
+                                }
+                                else
+                                {
+                                    images = new List<Image>();
+                                }
+
+
+                                dynamic FirstImage = curItem.images[0];
+
+                                if (FirstImage == null)
+                                    throw new Exception("First image not found");
+
+                                FirstImage.large = large;
+                                FirstImage.thumb = thumb;
+                                FirstImage.medium = medium;
+                                FirstImage.small = small;
+
                                 try
                                 {
-                                    if (userToken == null)
-                                    {
-                                        uploadPage = client.DownloadString(UploadPageUrl);
+                                    string saveSequenceURL = string.Format(AppSettings.SaveSequenceURL, detectedVertical, ItemID,
+                                        userToken);
 
-            							userToken = (from p in
-                                             cookieJar.GetCookies(new Uri("https://www.1stdibs.com")).Cast<Cookie>()
-                                             where p.Name.Equals("userToken")
-                                             select p.Value).FirstOrDefault();
-                                    }
+                                    JsonReader jsonReader =
+                                        new JsonTextReader(new StringReader(bkpCurrentSequenceJSON))
+                                        {
+                                            DateParseHandling = DateParseHandling.None
+                                        };
+                                    dynamic rss = JObject.Load(jsonReader);
+                                    var imagesX = (from p in (JArray)curItem.images
+										where string.IsNullOrWhiteSpace((string)p["large"]) == false 
+										select p).ToArray();
 
-                                    if (string.IsNullOrWhiteSpace(uploadPage))
-                                    {
-                                        uploadPage = client.DownloadString(UploadPageUrl);
-                                    }
-
-                                    CQ uploadPageDom = uploadPage;
-
-                                    //get seller id
-                                    //1.	Get current image sequence & extract seller id (GET)
-                                    string getSequenceURL = string.Format(AppSettings.GetSequenceURL, Vertical.ToLower(),
-                                        ItemID, userToken);
-
-                                    string curSequenceJSON = client.DownloadString(getSequenceURL);
-
-                                    JsonReader jsonReaderX = new JsonTextReader(new StringReader(curSequenceJSON)) { DateParseHandling = DateParseHandling.None };
-                                    dynamic curSequence = JObject.Load(jsonReaderX);
-
-                                    dynamic curItem = null;
+                                    dynamic resultItem = null;
                                     switch (Vertical)
                                     {
                                         case "fashion":
-                                            curItem = curSequence.result.fashionItem;
-                                            if (curItem == null)
-                                            {
-                                                detectedVertical = "jewelry";
-                                                curItem = curSequence.result.jewelryItem;
-                                            }
+                                            dynamic tmp = rss.result.fashionItem ?? rss.result.jewelryItem;
+                                            resultItem = tmp.images;
                                             break;
                                         case "jewelry":
-                                            curItem = curSequence.result.jewelryItem;
+                                            resultItem = rss.result.jewelryItem.images;
                                             break;
                                     }
 
-                                    bool uploadSuccess = false;
-                                    AcceptedImageList lstUploaded = null;
-                                    try
-                                    {
-                                        //2.	Upload image to server (POST)
-                                        string ImageuploadURL = string.Format(AppSettings.ImageUploadURL, curItem.seller.id);
+                                    if (
+                                        !string.IsNullOrWhiteSpace(
+                                            Convert.ToString(
+                                                curItem.pricing.initialPriceCurrencies)))
+                                        resultItem.pricing.initialPriceCurrencies =
+                                            (JObject)
+                                                JToken.FromObject(
+                                                    curItem.pricing
+                                                        .initialPriceCurrencies);
 
-       									byte[] uploadFileResponseBytes = client.UploadFile(ImageuploadURL, "POST", imageFile.FullName); //pick file from same directory
-                                        string uploadFileResponse = Encoding.UTF8.GetString(uploadFileResponseBytes);
+                                    if (
+                                        !string.IsNullOrWhiteSpace(
+                                            Convert.ToString(
+                                                curItem.pricing.amountCurrencies)))
+resultItem.pricing.amountCurrencies =(JObject)JToken.FromObject(curItem.pricing.amountCurrencies);
 
 
-                                        lstUploaded = AcceptedImageList.GetItemDetails(uploadFileResponse);
+resultItem = (JArray)JToken.FromObject(imagesX);
 
-                                        if (lstUploaded.status.Equals("success",
-                                            StringComparison.InvariantCultureIgnoreCase))
-                                            uploadSuccess = true;
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        WriteMessageToFile(ItemID + "-" + ex.Message);
-                                        WriteMessageToFile("File upload failed, " + ex.Message,
-                                            System.Diagnostics.TraceEventType.Error);
-                                    }
-
-                                    if (uploadSuccess)
-                                    {
-                                        string original = lstUploaded.accepted[0].original;
-                                        string thumb = lstUploaded.accepted[0].thumb;
-                                        string large = lstUploaded.accepted[0].large;
-
-                                        //3.	Get small and medium images (POST)
-                                        string resizeImageURL =
-                                            "https://adminv2.1stdibs.com/image/ajax/ajax_dealer_resize_images";
-                                        NameValueCollection resizeParams = new NameValueCollection();
-                                        resizeParams.Add("images[image1][web_url]", lstUploaded.accepted[0].large);
-                                        byte[] responseResizeBytes = client.UploadValues(resizeImageURL, resizeParams);
-                                        //login
-                                        string responseResize = Encoding.UTF8.GetString(responseResizeBytes);
-                                        ResizedImage imgResized = ResizedImage.GetResizedImage(responseResize);
-
-                                        string medium = imgResized.image1.medium;
-                                        string small = imgResized.image1.small;
-                                        //4.	Save the newly updated image sequences (PUT)
-                                        dynamic images = null;
-                                        if (curItem.images != null)
+var count = resultItem.Count;
+resultItem[count - 1].original = Convert.ToString(lstUploaded.accepted[0].original);
+                             var json = JsonConvert.SerializeObject(curItem,
+                                        Newtonsoft.Json.Formatting.Indented,
+                                        new JsonSerializerSettings
                                         {
-                                            images = curItem.images;
-                                        }
-                                        else
+                                    NullValueHandling = NullValueHandling.Ignore
+
+client = new WebClientX(cookieJar, "application/json; charset=UTF-8");
+
+                                    //Issue 403 forbidden
+byte[] changeSequenceByte = client.UploadData(saveSequenceURL, "PATCH", Encoding.UTF8.GetBytes(json));
+string changeSequenceResponse = Encoding.UTF8.GetString(changeSequenceByte);
+
+                                    //backup updated sequence
+              string bkpUpdatedSequence = JsonConvert.SerializeObject(rss,
+                                        Newtonsoft.Json.Formatting.Indented,
+                                        new JsonSerializerSettings
                                         {
-                                            images = new List<Image>();
-                                        }
-
-
-                                        dynamic FirstImage = curItem.images[0];
-
-                                        if (FirstImage == null)
-                                            throw new Exception("First image not found");
-
-                                        FirstImage.large = large;
-                                        FirstImage.thumb = thumb;
-                                        FirstImage.medium = medium;
-                                        FirstImage.small = small;
-
-                                        try
-                                        {
-                                            string saveSequenceURL = string.Format(AppSettings.SaveSequenceURL, detectedVertical, ItemID,
-                                                userToken);
-
-                                            JsonReader jsonReader =
-                                                new JsonTextReader(new StringReader(bkpCurrentSequenceJSON))
-                                                {
-                                                    DateParseHandling = DateParseHandling.None
-                                                };
-                                            dynamic rss = JObject.Load(jsonReader);
-                                            var imagesX = (from p in (JArray)curItem.images
-												where string.IsNullOrWhiteSpace((string)p["large"]) == false 
-												select p).ToArray();
-
-                                            dynamic resultItem = null;
-                                            switch (Vertical)
-                                            {
-                                                case "fashion":
-                                                    dynamic tmp = rss.result.fashionItem ?? rss.result.jewelryItem;
-                                                    resultItem = tmp.images;
-                                                    break;
-                                                case "jewelry":
-                                                    resultItem = rss.result.jewelryItem.images;
-                                                    break;
-                                            }
-
-                                            if (
-                                                !string.IsNullOrWhiteSpace(
-                                                    Convert.ToString(
-                                                        curItem.pricing.initialPriceCurrencies)))
-                                                resultItem.pricing.initialPriceCurrencies =
-                                                    (JObject)
-                                                        JToken.FromObject(
-                                                            curItem.pricing
-                                                                .initialPriceCurrencies);
-
-                                            if (
-                                                !string.IsNullOrWhiteSpace(
-                                                    Convert.ToString(
-                                                        curItem.pricing.amountCurrencies)))
-  resultItem.pricing.amountCurrencies =(JObject)JToken.FromObject(curItem.pricing.amountCurrencies);
-
-
-        resultItem = (JArray)JToken.FromObject(imagesX);
-
-        var count = resultItem.Count;
- resultItem[count - 1].original = Convert.ToString(lstUploaded.accepted[0].original);
-                                     var json = JsonConvert.SerializeObject(curItem,
-                                                Newtonsoft.Json.Formatting.Indented,
-                                                new JsonSerializerSettings
-                                                {
                                             NullValueHandling = NullValueHandling.Ignore
+                                        });
 
-       client = new WebClientX(cookieJar, "application/json; charset=UTF-8");
-
-                                            //Issue 403 forbidden
-       byte[] changeSequenceByte = client.UploadData(saveSequenceURL, "PATCH", Encoding.UTF8.GetBytes(json));
-       string changeSequenceResponse = Encoding.UTF8.GetString(changeSequenceByte);
-
-                                            //backup updated sequence
-                      string bkpUpdatedSequence = JsonConvert.SerializeObject(rss,
-                                                Newtonsoft.Json.Formatting.Indented,
-                                                new JsonSerializerSettings
-                                                {
-                                                    NullValueHandling = NullValueHandling.Ignore
-                                                });
-
-                                                                                        successfullyProcessed++;
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            WriteMessageToFile(ItemID + "-" + ex.Message,
-                                                System.Diagnostics.TraceEventType.Error);
-                                            WriteMessageToFile("Unexpected error, " + ex.Message,
-                                                System.Diagnostics.TraceEventType.Error);
-                                        }
-                                    }
+                                                                                successfullyProcessed++;
                                 }
                                 catch (Exception ex)
                                 {
-                                    WriteMessageToFile(ItemID + "-" + ex.Message, System.Diagnostics.TraceEventType.Error);
-                                    WriteMessageToFile("Unexpected error, " + ex.Message, System.Diagnostics.TraceEventType.Error);
+                                    WriteMessageToFile(ItemID + "-" + ex.Message,
+                                        System.Diagnostics.TraceEventType.Error);
+                                    WriteMessageToFile("Unexpected error, " + ex.Message,
+                                        System.Diagnostics.TraceEventType.Error);
                                 }
                             }
-                            else
-                            {
-                                WriteMessageToFile("Abort uploading, item already uploaded", System.Diagnostics.TraceEventType.Error);
-                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            WriteMessageToFile("Item Key not found, Please check selected vertical", System.Diagnostics.TraceEventType.Error);
+                            WriteMessageToFile(ItemID + "-" + ex.Message, System.Diagnostics.TraceEventType.Error);
+                            WriteMessageToFile("Unexpected error, " + ex.Message, System.Diagnostics.TraceEventType.Error);
                         }
+                    }
+                    else
+                    {
+                        WriteMessageToFile("Abort uploading, item already uploaded", System.Diagnostics.TraceEventType.Error);
                     }
                 }
                 else
                 {
-                    WriteMessageToFile("No records to upload", System.Diagnostics.TraceEventType.Error);
+                    WriteMessageToFile("Item Key not found, Please check selected vertical", System.Diagnostics.TraceEventType.Error);
                 }
             }
-            else
-            {
-                WriteMessageToFile("Login failed", System.Diagnostics.TraceEventType.Error);
-                throw new Exception("Login failed");
-            }
-            return successfullyProcessed;
         }
+        else
+        {
+            WriteMessageToFile("No records to upload", System.Diagnostics.TraceEventType.Error);
+        }
+    }
+    else
+    {
+        WriteMessageToFile("Login failed", System.Diagnostics.TraceEventType.Error);
+        throw new Exception("Login failed");
+    }
+    return successfullyProcessed;
+}
 
 private void MoveImagesNext(int max, CurrentSequence curSequence)
 {
@@ -709,12 +707,14 @@ public class InitPriceCur
     public double EUR { get; set; }
     public double USD { get; set; }
 }
+
 public class AmountCur
 {
     public double PND { get; set; }
     public double EUR { get; set; }
     public double USD { get; set; }
 }
+
 public class ReturnPolicy
 {
 }

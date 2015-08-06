@@ -5,7 +5,8 @@ As of August 2015, the below flow diagram describes our understanding of Datamat
 ![flow diagram][flow-diagram]
 
 #### resources
-* [scraper source code (C#)](datamatics_scraping_source.cs)
+* [download scraper source code (C#)](datamatics_scraping_source.cs)
+* [upload source code (C#)](datamatics_upload_source.cs)
 * [CQ class](https://github.com/jamietre/CsQuery) (used extensively in abov)
 * [Uploading / Approving Items (QA test) doc](https://docs.google.com/presentation/d/1zSVeVcoPI-JFZjyA8qG4cnTNvDJr3ZbQI6sHwAEz6rA/edit#slide=id.g6cc6cafbb_0106)
 
@@ -46,7 +47,7 @@ Here are URLs datamatics uses (with schemes, hosts, paths):
 * https://www.admin.1stdibs.com/archivesE/{0}
 	* {0} – Image physical path depends on item ID & Seller ID
 
-See [datamatics_scraping_source.cs](datamatics_scraping_source.cs) for the full source code of their download scraping tool (it's a doozy).
+See [datamatics_scraping_source.cs](datamatics_scraping_source.cs) for the full source code of their download scraping tool.
 
 https://adminv2.1stdibs.com/login/internal login POST data:
 
@@ -61,17 +62,19 @@ https://adminv2.1stdibs.com/login/internal login POST data:
 
 ## upload process
 
-##### front-end
+##### front-end URLs
 * https://adminv2.1stdibs.com/internal/image-upload/
 * https://adminv2.1stdibs.com/image/ajax/dealer_image_upload?seller_id={0}
+* https://adminv2.1stdibs.com/image/ajax/ajax_dealer_resize_images
+* https://admin.1stdibs.com/citysearch-administration/photo_processing/ajax/i_update_imgstatus.php
 
-##### back-end
+##### back-end endpoints
 * https://adminv2.1stdibs.com/soa/inventory/3.1/{0}/item/{1}?userToken={2}
 * https://adminv2.1stdibs.com/soa/inventory/3.1/{0}/item/{1}?fields=images&userToken={2}
 
 {0} – Vertical, {1} = Item PK, {2} = userToken cookie value
 
-More TK...
+See [upload source code (C#)](datamatics_upload_source.cs) for the full source code of their upload tool.
 
 ## Service call documentation
 
