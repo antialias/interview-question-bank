@@ -10,6 +10,15 @@ As of August 2015, the below flow diagram describes our understanding of Datamat
 * [CQ class](https://github.com/jamietre/CsQuery) (used extensively in abov)
 * [Uploading / Approving Items (QA test) doc](https://docs.google.com/presentation/d/1zSVeVcoPI-JFZjyA8qG4cnTNvDJr3ZbQI6sHwAEz6rA/edit#slide=id.g6cc6cafbb_0106)
 
+Login POST data to https://adminv2.1stdibs.com/login/internal (this is how datamatics always logs-in)
+
+| field    | value                         |
+|----------|-------------------------------|
+| email    | e.g.: india1@1stdibsindia.com |
+| password | e.g.: india123                |
+| do-login | 1                             |
+
+
 Below is a list of URLs they hit the front-end to scrape our site in order to download data and images as well as upload data and images.
 
 **IMPORTANT** any change to the schemes, hosts, paths OR HTML in any of these files could cause their automated systems to fail.
@@ -36,7 +45,10 @@ Here are URLs datamatics uses (with schemes, hosts, paths):
 	* set as the referrer on their client for some reason
 
 * https://adminv2.1stdibs.com/login/internal 
-	* POST data (see below)
+	* POSTs field/values
+	    * email / {email address e.g.: india1@1stdibsindia.com}
+	    * password / {password e.g.: india123}
+	    * do-login / 1
 
 * https://admin.1stdibs.com/citysearch-administration/photo_processing/i_view.php
 	* the URL that they then load and start scraping.
@@ -49,14 +61,6 @@ Here are URLs datamatics uses (with schemes, hosts, paths):
 
 See [datamatics_scraping_source.cs](datamatics_scraping_source.cs) for the full source code of their download scraping tool.
 
-https://adminv2.1stdibs.com/login/internal login POST data:
-
-| field    | value                         |
-|----------|-------------------------------|
-| email    | e.g.: india1@1stdibsindia.com |
-| password | e.g.: india123                |
-| do-login | 1                             |
-
 ++
 
 
@@ -67,6 +71,11 @@ https://adminv2.1stdibs.com/login/internal login POST data:
 * https://adminv2.1stdibs.com/image/ajax/dealer_image_upload?seller_id={0}
 * https://adminv2.1stdibs.com/image/ajax/ajax_dealer_resize_images
 * https://admin.1stdibs.com/citysearch-administration/photo_processing/ajax/i_update_imgstatus.php
+    * this endpoint is used to update status of the item (POST) to "QC" via a post with these field/values: 
+        * dstdiv / imgstat{item id}
+        * itemID / {item id}
+        * imgstatus / "QC" (literal string)
+        * admin / {username}
 
 ##### back-end endpoints
 * https://adminv2.1stdibs.com/soa/inventory/3.1/{0}/item/{1}?userToken={2}
@@ -127,9 +136,7 @@ User Token = 1698644_a096a87e846763ebbde657ee8589ac2afac1138b2c148c863aa69487b53
 	* http://www.qa.1stdibs.com/soa/inventory/3.2/creators?vertical=FURNITURE&creatorStatus=APPROVED&startWith&pageStart=1&pageSize=1000&returnTotalResults=Y
 
 
-### 1stdibs Service Calls
-
-Below, also provided by datamatics:
+### 1stdibs Service Calls (documentation provided by datamatics)
 
 1. Auto login to 1stdibs workflow with particular accounts user credentials  
 2. To get current image sequence & extract seller id (GET) 
@@ -137,7 +144,7 @@ Below, also provided by datamatics:
 
 3. Upload image to server (POST)
 	* https://adminv2.1stdibs.com/image/ajax/dealer_image_upload?seller_id={sellerId}
-	* https://adminv2.1stdibs.com/internal/image-upload/ **In case of Fashion & Jewelry** <- unclear what this means
+	* https://adminv2.1stdibs.com/internal/image-upload/ **In case of Fashion & Jewelry** <- unclear what this means, it appears they just here to get the userToken cookie
 
 4.	Get small and medium images (POST)
 	* https://adminv2.1stdibs.com/image/ajax/ajax_dealer_resize_images
