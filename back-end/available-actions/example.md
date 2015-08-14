@@ -25,11 +25,12 @@ public class Item implements ServiceData, ActionDriven
 
 ##Adding Custom Action Processor
 If you are trying to add an action that does not relate to a state transition, create an ActionProcessor that contains the 
-for that action.
+for that action. IMPORTANT: Make sure it is either marked as a component or defined as a bean in some spring xml file. There needs to be an instance of the class in your application context.
 
 ```java
 import com.dibs.lib.action.ActionProcessor
 
+@Component
 public class FooActionProcessor implements ActionProcessor<DomainItem>
 {
   public Action process(DomainItem item)
