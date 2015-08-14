@@ -11,6 +11,8 @@
 
 Most of the core components of available actions paradigm live in [shared-lib] under the [com.dibs.lib.action][available actions] package. However the models, which determine the API for actions, live in [shared-service] under the [com.dibs.service.v2.action][shared-service actions] package.
 
+![available_actions](https://cloud.githubusercontent.com/assets/4480376/9283874/2966493a-42a5-11e5-8741-dde6851dedee.jpg)
+
 ###Action Driven
 Models in [shared-service] can now be marked as ActionDriven. This givens them a property called "actions" of type List<Action>.
 
