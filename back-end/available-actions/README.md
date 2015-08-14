@@ -1,6 +1,6 @@
-[overview]:https://github.com/1stdibs/necrodibsicon/blob/available-ac/back-end/available-actions/overview.md
-[implementation-details]:https://github.com/1stdibs/necrodibsicon/blob/available-ac/back-end/available-actions/implementation-details.md
-[example]:https://github.com/1stdibs/necrodibsicon/blob/available-ac/back-end/available-actions/example.md
+[overview]:https://github.com/1stdibs/necrodibsicon/blob/master/back-end/available-actions/overview.md
+[implementation-details]:https://github.com/1stdibs/necrodibsicon/blob/master/back-end/available-actions/implementation-details.md
+[example]:https://github.com/1stdibs/necrodibsicon/blob/master/back-end/available-actions/example.md
 
 #Available Actions
 
