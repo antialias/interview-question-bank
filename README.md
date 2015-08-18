@@ -6,7 +6,9 @@ Klaatu barada neck tie!
 <img src="./assets/images/necrodibsicon.gif" />
 
 ## General
+- [Credentials](./general/credentials.md)
 - [Jira](./general/jira.md)
+- [Release Cycle](./general/release.md)
 - [Mothra](./general/mothra.md)
 - [Dibsy](./general/dibsy.md)
 - [Datamatics Integration](./general/datamatics/datamatics.md)
