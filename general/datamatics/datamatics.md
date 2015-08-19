@@ -25,6 +25,10 @@ Below is a list of URLs they hit the front-end to scrape our site in order to do
 
 ## download process
 
+* Photo process scraping is only done on furniture.
+* Fashion jewelry is sent over in a spreadsheet.
+* Art is not photo processed.
+
 This is the data that they scrape from `/citysearch-administration/photo_processing/i_view.php`:
 * 1stdibs reference number
 * item ID
