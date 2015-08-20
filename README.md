@@ -12,6 +12,7 @@ Klaatu barada neck tie!
 - [Mothra](./general/mothra.md)
 - [Dibsy](./general/dibsy.md)
 - [Datamatics Integration](./general/datamatics/datamatics.md)
+- [kegbot](./general/kegbot.md)
 
 ## [Front-End](./front-end/)
 
