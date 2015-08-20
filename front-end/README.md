@@ -11,3 +11,4 @@ Other stuff
 - [npm](./npm.md)
 - [environments](../sysops/environments.md)
 - [devbox](./devbox.md)
+- [known browser bugs](./browser-bugs.md)
