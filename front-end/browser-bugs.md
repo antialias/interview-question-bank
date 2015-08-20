@@ -3,7 +3,7 @@
 Date | Device Info (OS/Version, Browser/Version) | Bug Description | Other examples
 --- | --- | --- | ---
 2015-08-19 | iPhone 6/iOS 8.4/Safari, 10.10.5/Safari 8.0.8 | Repeated clicks on toggling nav elements will intermittently stop responding | <http://www.techcrunch.com/>, <http://www.bloomberg.com/>
-2015-08-19 | iPhone 6/iOS 8.4/Safari, 10.10.5/Safari 8.0.8 | Scrolling a fixed position div will clip the background color of the page through to the front | <http://www.westelm.com/>, <http://www.bloomberg.com/>
+2015-08-19 | iPhone 6/iOS 8.4/Safari, 10.10.5/Safari 8.0.8 | Scrolling a fixed position div down may clip the background color of the page through to the front (manifests as a colored bar at the bottom of the screen, see the screenshot below) | <http://www.westelm.com/>, <http://www.bloomberg.com/>
 
 ## Sample screenshots
 
