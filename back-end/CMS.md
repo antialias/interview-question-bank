@@ -4,6 +4,8 @@ The CMS stores data that make up the content of pages on 1stdibs.com that's inte
 
 This document attempts to clean up [the old wiki's documentation](https://sites.google.com/a/1stdibs.com/wiki/home/engineering/services-documentation/cms-service?pli=1).
 
+Version 2 of the CMS is currently on Draft 3.  The draft is available [in a Google Doc](https://docs.google.com/document/d/11WP-0Mn8GV5Wm0xoOk0VuLX8YGjq6C0CCnUVsT8pZUE/edit).
+
 ## Endpoints
 
 | environment | URL |
@@ -611,7 +613,3 @@ Examples:
     "action": "update"
 }
 ```
-
-## Version 2
-
-Version 2 of the CMS is currently on Draft 3.  The draft is available [in a Google Doc](https://docs.google.com/document/d/11WP-0Mn8GV5Wm0xoOk0VuLX8YGjq6C0CCnUVsT8pZUE/edit).
