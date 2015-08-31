@@ -14,4 +14,16 @@ Fixed-position div clipping | ![clipping](./images/clipping.png)
 
 ## SVG Alginment
 
-To have an SVG diplay properly in Safari v8, make sure that it is set to `display: block` and make sure that both `height` and `width` are properly set for the DOM element.
+To have an SVG diplay properly in Safari v8, make sure the element has a defined height, and that both it and it's parent have a block display mode.
+
+```css
+.element {
+    display: inline-block;
+    & .nav-bar-logo-svg {
+        position: relative;
+        display: block;
+        height: 24px;
+        width: 100%;
+    }
+}
+```
