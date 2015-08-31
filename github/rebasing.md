@@ -97,7 +97,9 @@ The following is a list of commands that are allowed during an interactive rebas
 
 That list is always included while in an interactive rebase. 
 
-### Squashing
+# Squashing
+
+## Squashing using an interactive rebase.
 
 You can also squash multiple commits into one:
 
@@ -139,7 +141,15 @@ This will accomplish the same as using the `squash` command (indicated by `s`), 
 
 Once you have finished your interactive rebasing, it's advisable to rebase these changes on top of your target branch.
 
+## Squashing via git --amend
 
+Instead of using the interactive mode of rebasing, you can amend commits into one as you work on your PR.
+
+```sh
+git commit -p --amend
+```
+
+You can run this for each commit after the first in a feature branch. The `--amend` instructs git to take the changes that would go into this commit and apply them to the previous commit, so that as you work you will continue to have only one commit that will ultimately make up your PR. The `-p` flag, which stands for patch, will walk you through the changes and allows you to determine what will be added to the commit, so that you don't accidentally add work before it is ready.
 
 
 
