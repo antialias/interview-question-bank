@@ -13,3 +13,4 @@ Other stuff
 - [devbox](./devbox.md)
 - [Browser Support](./browser-support.md)
 - [Known Browser Bugs](./browser-bugs.md)
+- [El Capitan Upgrade Notes](./el-capitan.md)
