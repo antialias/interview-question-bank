@@ -1,5 +1,6 @@
 # Browser Support
 
+See this Google Doc for our current browser support:
 https://docs.google.com/document/d/1wgqHm9FYInYM7Ah-VgoxezODr7AJ54DHD0DD_yerpQI/edit
 
 ## Glossary
