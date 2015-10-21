@@ -10,6 +10,7 @@
 
 ###Other stuff
 
+* [code quality](./code-quality.md)
 * [browser support](./browser-support.md)
 * [npm](./npm.md)
 * [environments](../sysops/environments.md)
