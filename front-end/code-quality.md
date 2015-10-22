@@ -23,7 +23,7 @@ Here's a very simple example, but I think it illustrates my point:
 
 Of course, clarity is a moving target (and the [cause of much debate](https://www.reddit.com/r/javascript/comments/1bl24h/explicit_vs_clever/)). Code that seems overly clever today is a well-understood convention tomorrow. What seems clear to me, may look like jibberish to you. When in doubt, consult our [JavaScript style guide](https://github.com/1stdibs/javascript).
 
-Clarity isn't simply how you organize your code, but how you choose different building blocks. For example, when deciding on how to call a function with a specific context (i.e. the value of `this`) should you use `Function.prototype.bind` or `$.proxy`? (Correct answer: `Function.prototype.bind`.)
+Clarity isn't simply how you organize your code, but how you choose different building blocks. For example, when deciding on how to bind a context to a function (i.e. force the value of `this` when it is called) should you use `Function.prototype.bind` or `$.proxy`? (Correct answer: `Function.prototype.bind`.)
 
 **some rules of thumb**
 
