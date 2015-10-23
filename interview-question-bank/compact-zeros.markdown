@@ -34,7 +34,7 @@ compact([1, 2, 1, 0, 2, 1, 2])
 
 ## reference implementation
 ```js
-var compact = functionInPlace(a) {
+var compact = function (a) {
     var i;
     var p = 0;
     for(i=0; i < a.length; ++i) {
