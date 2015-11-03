@@ -2,7 +2,7 @@
 # Service Client Error Handling
 
 ###Overview
-Are you ever hitting your favorite backend endpoint, when suddenly, disaster strikes? You might see a response like this:
+Are you ever hitting your favorite backend endpoint when suddenly... disaster strikes? You might see a response like this:
 
 ```json
 {
