@@ -25,7 +25,7 @@ In BE world, we create client classes for services if we plan on making BE to BE
   - No response or a response that BE can't parse is returned
   - A response is returned and parsed, but it's a 5** range http code
 
-If one of those things happens, we build up an error that shows what call we were trying to make and what happened. Additionally, these errors stack. Meaning that if ecom calls inventory to load the item and inventory fails because it tries to load the shipment quotes from logistics and logistics is down, then the final response from ecom will say show both the failure in inventory and in logistics. This is useful because it makes it clear that logistics is actually causing the problem.
+If one of those things happens, we build up an error that shows what call we were trying to make and what happened. Additionally, these errors stack. Meaning that if ecom calls inventory to load the item and inventory fails because it tries to load the shipment quotes from logistics and logistics is down, then the final response from ecom will show both the failure in inventory and in logistics. This is useful because it makes it clear that logistics is actually causing the problem.
 
 #Sample Error Response
 ```json
@@ -53,4 +53,4 @@ If one of those things happens, we build up an error that shows what call we wer
 The above JSON is from a test in which a call to inventory fails because the logistics call failed. This was simulated by messing up the configured URL for logistics so that we get back an error. Note that in error.details we see two errors. The first is the initial call to inventory item endpoint, the second is the call that inventory tried to make to logistics.
 
 ###Summary
-These new response errors should not be displayed to the end user, but instead are more intended for our own debugging purposes. And hopefully can prove to be useful going forward. 
+These new response errors should not be displayed to the end user, but instead are more intended for our own debugging purposes. Hopefully, this improvement will make it easier to determine which back end engineer to yell at what you get a service error.
