@@ -53,4 +53,4 @@ If one of those things happens, we build up an error that shows what call we wer
 The above JSON is from a test in which a call to inventory fails because the logistics call failed. This was simulated by messing up the configured URL for logistics so that we get back an error. Note that in error.details we see two errors. The first is the initial call to inventory item endpoint, the second is the call that inventory tried to make to logistics.
 
 ###Summary
-These new response errors should not be displayed to the end user, but instead are more intended for our own debugging purposes. Hopefully, this improvement will make it easier to determine which back end engineer to yell at what you get a service error.
+These new response errors should not be displayed to the end user, but instead are more intended for our own debugging purposes. Hopefully, this improvement will make it easier to determine which back end engineer to yell at when you get a service error.
