@@ -28,7 +28,7 @@ The kegarator uses a 5# Co2 tank. The winerator uses a 40# or 60# G-Mix tank.
 
 We offer a variety of beers at Bar 51. We try not to get the very generic brands (ie. Bud-related beers). The taps are always on a rotating basis depending on what the distributor is carrying that week.
 
-There should be anywhere from one to three beers on tap at all times. If the tap 
+There should be anywhere from one to three beers on tap at all times.
 
 We are always open to suggestions if we can get it from the supplier.
 
