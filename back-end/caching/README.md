@@ -4,6 +4,8 @@
 
 #Caching
 
+![caching](http://www.quickmeme.com/img/d0/d053e99d38c58ae66c7cd0e61f2944605e1a4453514b0d676c90fd8067d4706d.jpg)
+
 Start here:
 [overview]
 
