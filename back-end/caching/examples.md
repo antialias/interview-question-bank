@@ -8,7 +8,7 @@
 
 ###Basics
 ####Cache Factory
-[cache-factory] is intended to help you construct new caches easily if you opt to construct them programmatically. It also handles certain things for you automatically, like registering your newly create cache so that it is visible/available to the [cache-manager](https://github.com/1stdibs/necrodibsicon/blob/master/back-end/caching/cache-manager.md). To use the [cache-factory], simply autowire it where needed and call getCache (example below).
+[cache-factory] is intended to help you construct new caches easily if you opt to construct them programmatically. It also handles certain things for you automatically, like registering your newly created cache so that it is visible/available to the [cache-manager](https://github.com/1stdibs/necrodibsicon/blob/master/back-end/caching/cache-manager.md). To use the [cache-factory], simply autowire it where needed and call getCache (example below).
 
 ```java
 public class CacheFactoryExample
