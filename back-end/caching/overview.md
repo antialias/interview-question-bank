@@ -8,9 +8,9 @@ Shared-util now supports pluggable/easy to configure caching via various impleme
 
 Apart from making caching code more consistent across BE, this affords us several other benefits, such as being able to scan for all caches being used in a application (i.e inventory or ecom) and register them against a unique name. Having them all registered, means we can build a shared controller (every service gets this endpoint) that can do basic operations like display all caches in use, evict all from a specific cache, or even disable a cache if it is causing bugs.
 
-#More Info
-For more on the cache manager service - ...
-For more detailed code example on setting up caching - ...
+###More Info
+* For more on the cache manager service: [cache-manager](https://github.com/1stdibs/necrodibsicon/blob/master/back-end/caching/cache-manager.md)
+* For more detailed code example on setting up caching - ...
 
 ###Sample Code
 
