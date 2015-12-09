@@ -1,67 +1,36 @@
 
 
-# Caching
+# Cache Manager
 
 ###Overview
-Shared-util now supports pluggable/easy to configure caching via various implementations of the Cache interface (found here: [cache-interface](https://github.com/1stdibs/shared-util/blob/master/src/main/java/com/dibs/util/cache/Cache.java)). 
+Cache Manager is a basic service endpoint that allows you to see what caches a service is currently using as well as perform basic operations on them.
 
-Apart from making caching code more consistent across BE, this affords us several other benefits, such as being able to scan for all caches being used in a application (i.e inventory or ecom) and register them against a unique name. Having them all registered, means we can build a shared controller (every service gets this endpoint) that can do basic operations like display all caches in use, evict all from a specific cache, or even disable a cache if it is causing bugs.
+###Loading caches
+Use the following endpoint to view caches being used in the service:
 
-#More Info
-For more on the cache manager service - ...
-For more detailed code example on setting up caching - ...
+* http://qa/soa/inventory-3/2/cache.json?apiToken=engineering_w1e95GT1787DV6Nv514g5y9u9M0t3kqN
 
-###Sample Code
+####Notes
+* If you change inventory-3 to another application (identity, ecom, etc) it will show caches in that application. 
+* The engineering is required, otherwise the service will throw errors at you
 
-```java
-public class ExampleWithCache
-{
-  /*
-   * Can be configured in XML or in post construct.
-   */
-  private Cache<Long, Item> itemCache;
-  
-  @Autowired
-  private CacheFactory cacheFactory;
-  
-  /*
-   *  Example config in post construct
-   */
-  @PostConstruct
-  public void init()
-  {
-    //Build up a cache config
-    CacheConfig config = new CacheConfig().setExpireMillis(1000L).setName("inventoryItemCache");
-    
-    //use factory class to build a cache of the desired type/configuration
-    itemCache = cacheFactory.getCache(CacheType.STATIC_MAP, config);
-  }
-  
-  public Item readItem(Long id)
-  {
-    Item item = itemCache.get(id);
-    
-    if(item == null)
-    {
-      //go get it the more expensive way
-    }
-    
-    return item;
-  }
-  
-  public void updateItem(Item item)
-  {
-    //do item update
-    
-    Long id = item.getId();
-    
-    //clearCache
-    itemCache.evict(id);
-  }
-  
-  public void clearItemCache()
-  {
-    itemCache.evictAll();
-  }
-}
-```
+###Evicting
+
+####Evict All
+A GET request to the following endpoint will call the .evictAll() method on all registered caches:
+
+* http://qa/soa/inventory-3/2/cache/evict.json?apiToken=engineering_w1e95GT1787DV6Nv514g5y9u9M0t3kqN
+
+####More Granular Evicts
+A GET request to the endpoint below supports java regular expression syntax ([java-regex](http://www.tutorialspoint.com/java/java_regular_expressions.htm)) and evicts all caches whose names match the
+regular expression:
+
+* http://qa/soa/inventory-3/2/cache/evict/_someRegularExpression_.json?apiToken=engineering_w1e95GT1787DV6Nv514g5y9u9M0t3kqN
+
+###Disable/Enable
+You can turn caches on/off using the following endpoints (both GET requests)
+
+* http://qa/soa/inventory-3/2/cache/disable/_someCache_.json?apiToken=engineering_w1e95GT1787DV6Nv514g5y9u9M0t3kqN
+
+* http://qa/soa/inventory-3/2/cache/enable/_someCache_.json?apiToken=engineering_w1e95GT1787DV6Nv514g5y9u9M0t3kqN
+
