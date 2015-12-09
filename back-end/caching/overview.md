@@ -12,7 +12,7 @@ Apart from making caching code more consistent across BE, this affords us severa
 
 ###More Info
 * For more on the cache manager service: [cache-manager](https://github.com/1stdibs/necrodibsicon/blob/master/back-end/caching/cache-manager.md)
-* For more detailed code example on setting up caching - ...
+* For more detailed code example on setting up caching - [examples](https://github.com/1stdibs/necrodibsicon/blob/master/back-end/caching/examples.md)
 
 
 ###Sample Code
