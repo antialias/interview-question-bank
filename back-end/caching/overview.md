@@ -3,6 +3,8 @@
 
 # Caching
 
+![caching](http://www.quickmeme.com/img/d0/d053e99d38c58ae66c7cd0e61f2944605e1a4453514b0d676c90fd8067d4706d.jpg)
+
 ###Overview
 Shared-util now supports pluggable/easy to configure caching via various implementations of the Cache interface (found here: [cache-interface](https://github.com/1stdibs/shared-util/blob/master/src/main/java/com/dibs/util/cache/Cache.java)). 
 
@@ -11,6 +13,7 @@ Apart from making caching code more consistent across BE, this affords us severa
 ###More Info
 * For more on the cache manager service: [cache-manager](https://github.com/1stdibs/necrodibsicon/blob/master/back-end/caching/cache-manager.md)
 * For more detailed code example on setting up caching - ...
+
 
 ###Sample Code
 
