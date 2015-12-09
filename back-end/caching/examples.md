@@ -29,7 +29,7 @@ public class CacheFactoryExample
 ```
 
 ####CacheHelper
-[cache-helper] is a convenience class, which makes it easy to use the [cache-factory] in XML. Under the hood, it wraps a cache, has a config and setter methods that put variables into the config. Then on post construct, it uses the [cache-factory] to instatiate the internal cache (it then delegates to all this internal cache for all the methods overrided from the [cache-interface]. This is the preferred method for instantiating a new cache using XML, since it auto-registers and reaps the benefits of the configuration code in [cache-factory].
+[cache-helper] is a convenience class, which makes it easy to use the [cache-factory] in XML. Under the hood, it wraps a cache, has a config and setter methods that put variables into the config. Then on post construct, it uses the [cache-factory] to instatiate the internal cache (it then delegates to all this internal cache for all the methods overrided from the [cache-interface]). This is the preferred method for instantiating a new cache using XML, since it auto-registers and reaps the benefits of the configuration code in [cache-factory].
 
 ```xml
 <bean class="com.dibs.util.cache.impl.CacheHelper" >
