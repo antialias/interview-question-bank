@@ -1,7 +1,7 @@
-[cache-factory](https://github.com/1stdibs/shared-util/blob/master/src/main/java/com/dibs/util/cache/factory/CacheFactory.java)
-[cache-helper](https://github.com/1stdibs/shared-util/blob/master/src/main/java/com/dibs/util/cache/impl/CacheHelper.java)
-[cache-interface](https://github.com/1stdibs/shared-util/blob/master/src/main/java/com/dibs/util/cache/Cache.java)
-[memcacheUtil](https://github.com/1stdibs/shared-util/blob/master/src/main/java/com/dibs/util/memcache/MemcacheUtil.java)
+[cache-factory]:https://github.com/1stdibs/shared-util/blob/master/src/main/java/com/dibs/util/cache/factory/CacheFactory.java
+[cache-helper]:https://github.com/1stdibs/shared-util/blob/master/src/main/java/com/dibs/util/cache/impl/CacheHelper.java
+[cache-interface]:https://github.com/1stdibs/shared-util/blob/master/src/main/java/com/dibs/util/cache/Cache.java
+[memcacheUtil]:https://github.com/1stdibs/shared-util/blob/master/src/main/java/com/dibs/util/memcache/MemcacheUtil.java
 
 #Caching Examples
 
