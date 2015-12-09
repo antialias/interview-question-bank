@@ -1,4 +1,4 @@
-[phone-screen]:https://github.com/1stdibs/necrodibsicon/blob/master/back-end/interviewing/phonescreen.md
+[phone-screen]:https://github.com/1stdibs/necrodibsicon/blob/master/back-end/interviewing/phone-screen.md
 [in-office]:https://github.com/1stdibs/necrodibsicon/blob/master/back-end/interviewing/in-office.md
 
 ###Interviewing
