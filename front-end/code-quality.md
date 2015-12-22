@@ -35,7 +35,7 @@ You see where I'm going with this: documentation is important. Which brings me t
 
 ### Document your code
 
-Your goal should be to document the code you write using [JSDoc style comments](http://usejsdoc.org/about-getting-started.html). If you're using PHPStorm or WebStorm, there's a handy plugin that will generate a template for you. See [JetBrain's documentation](https://www.jetbrains.com/webstorm/help/creating-jsdoc-comments.html). For Sublime Test users, check out [this plugin](https://github.com/Warin/Sublime/tree/master/DocBlockr).
+Your goal should be to document the code you write using [JSDoc style comments](http://usejsdoc.org/about-getting-started.html). If you're using PHPStorm or WebStorm, there's a handy plugin that will generate a template for you. See [JetBrain's documentation](https://www.jetbrains.com/webstorm/help/creating-jsdoc-comments.html). For Sublime Text users, check out [this plugin](https://github.com/Warin/Sublime/tree/master/DocBlockr).
 
 At 1stdibs we're currently not generating JSDocs, but the format is well-understood and sets us up for generated documentation in the future. Plus, PHPStorm and WebStorm love it and offer better inline documentation and auto-complete if JSDocs are present. 
 
