@@ -3,9 +3,10 @@
 
 #CronJobs
 
-CronJobManager is a framework for easy configuration and management of cron scheduled jobs. The framework registers cron jobs by a CronEnabledJob annotation on a method and a configuration in the database. Has support for scheduling jobs with leader election support, zookeeper semaphore support and reporting support. Endpoints are provided for basic CRUD operations on all cron job configurations, allowing you to enable/disable or change the scheduling of a job on the fly. It also provides an endpoint for manually running the job for testing purposes.
-
 Examples on how to use: [examples]
+Endpoints: [endpoints]
+
+CronJobManager is a framework for easy configuration and management of cron scheduled jobs. The framework registers cron jobs by a CronEnabledJob annotation on a method and a configuration in the database. Has support for scheduling jobs with leader election support, zookeeper semaphore support and reporting support. Endpoints are provided for basic CRUD operations on all cron job configurations, allowing you to enable/disable or change the scheduling of a job on the fly. It also provides an endpoint for manually running the job for testing purposes.
 
 ###CronJobManager
 
