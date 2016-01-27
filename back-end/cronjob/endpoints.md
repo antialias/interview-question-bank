@@ -24,6 +24,7 @@ Returns a list of all the cron jobs configured
 		}
 	]
 }
+```
 
 ###Read a single cron job:
 Returns the configuration of the requested cron job
@@ -45,7 +46,29 @@ Returns the configuration of the requested cron job
 		"semaphoreEnabled": "N"
 	}
 }
+```
 
 ###Run a cron job:
 Manually kick off the cron job
 /2/cronJob/{cronJobKey}/run?mode=FOREGROUND|BACKGROUND
+
+###Create a cron job:
+/2/cronJob (POST)
+Body:
+```json
+{
+    "apiType" : "cronJob",
+    "key" : "trendingDownload",
+    "cron" : "0 0 2 * * ?",
+    "poolSize" : 1,
+    "timeoutMillis" : 300000,
+    "enabled" : "Y",
+    "leaderEnabled" : "N",
+    "semaphoreEnabled" : "N",
+    "completedEmailList" : "geren@1stdibs.com",
+    "errorEmailList" : "geren@1stdibs.com"
+}
+```
+###Update a cron job
+/2/cronJob (PUT)
+Body is same as create
