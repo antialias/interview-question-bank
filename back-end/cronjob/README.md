@@ -1,5 +1,5 @@
-[examples]:https://github.com/1stdibs.com/necrodibsicon/blob/feature-cronjob-documentation/back-end/cronjob/examples.md
-[endpoints]:https://github.com/1stdibs/necrodibsicon/blob/feature-cronjob-documentation/back-end/cronjob/endpoints.md
+[examples]:https://github.com/1stdibs/necrodibsicon/blob/master/back-end/cronjob/examples.md
+[endpoints]:https://github.com/1stdibs/necrodibsicon/blob/master/back-end/cronjob/endpoints.md
 
 #CronJobs
 
