@@ -76,6 +76,7 @@ Now start up the service and create the cron job configuration through the creat
 ```
 
 #Zookeeper leader controlled cron jobs
+
 If the cron job is leader controlled there is some additional configuration needed.
 
 Create the leader election support bean in spring xml. Make sure to change bean id, rootNodeName and hostNameSuffix for the approriate service
