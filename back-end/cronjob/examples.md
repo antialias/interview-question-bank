@@ -15,6 +15,8 @@ CREATE TABLE `cron_job` (
   `leader_root_node` varchar(128) DEFAULT NULL,
   `semaphore_enabled` int(1) DEFAULT NULL,
   `semaphore_path` varchar(128) DEFAULT NULL,
+  `created_date` timestamp NULL DEFAULT NULL,
+  `modified_date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 ```
