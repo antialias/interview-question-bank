@@ -4,6 +4,7 @@ Each service has it's own endpoint for cron jobs so following endpoints need to 
 
 ###Read all cron jobs:
 Returns a list of all the cron jobs configured
+
 /2/cronJob.json
 ```json
 {
@@ -28,6 +29,7 @@ Returns a list of all the cron jobs configured
 
 ###Read a single cron job:
 Returns the configuration of the requested cron job
+
 /2/cronJob/{cronJobKey}.json
 ```json
 {
@@ -50,7 +52,9 @@ Returns the configuration of the requested cron job
 
 ###Run a cron job:
 Manually kick off the cron job
+
 If the job is zookeeper leader controlled this endpoint respects the bypassLeaderElection query parameter
+
 /2/cronJob/{cronJobKey}/run?mode=FOREGROUND|BACKGROUND
 
 ###Create a cron job:
@@ -71,4 +75,5 @@ Body:
 ```
 ###Update a cron job
 /2/cronJob (PUT)
+
 Body is same as create
