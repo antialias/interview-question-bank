@@ -50,6 +50,7 @@ Returns the configuration of the requested cron job
 
 ###Run a cron job:
 Manually kick off the cron job
+If the job is zookeeper leader controlled this endpoint respects the bypassLeaderElection query parameter
 /2/cronJob/{cronJobKey}/run?mode=FOREGROUND|BACKGROUND
 
 ###Create a cron job:
@@ -60,13 +61,12 @@ Body:
     "apiType" : "cronJob",
     "key" : "trendingDownload",
     "cron" : "0 0 2 * * ?",
+    "springProfileRegex" : ".*",
     "poolSize" : 1,
     "timeoutMillis" : 300000,
     "enabled" : "Y",
     "leaderEnabled" : "N",
-    "semaphoreEnabled" : "N",
-    "completedEmailList" : "geren@1stdibs.com",
-    "errorEmailList" : "geren@1stdibs.com"
+    "semaphoreEnabled" : "N"
 }
 ```
 ###Update a cron job

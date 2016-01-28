@@ -3,7 +3,7 @@
 
 #CronJobs
 
-Examples on how to use: [examples]
+Configuration and examples: [examples]
 
 Endpoints: [endpoints]
 
@@ -13,3 +13,22 @@ CronJobManager is a framework for easy configuration and management of cron sche
 
 CronJobManager does the bulk of the work in configuring and setting up the jobs. On service startup it finds all CronEnabledJob annotated method and reads the configuration from the database. It sets up CronJobRunnables that schedule themselves to be run based on the cron provided. It also provides the support for CRUD operations on the cron jobs.
 
+###What's Supported
+Each cron job can have the following properties:
+key: Unique identifier for the cron job
+
+spring_profile_regex: A regex that specifies what environments the cron job should run in. Eg .* for everything or production|stage for production and stage.
+
+time_out_millis: How long the job can run before the job manager cancels it
+
+pool_size: How many threads the thread pool will be created with
+
+cron: When to run
+
+leader_enabled: Y to enable using zookeeper leader election to only run the job on leader server
+
+leader_root_node: If the above is Y this is required. The root node in zookeeper that will be used. See examples for more info
+
+semaphore_enabled: Y to enable zookeeper semaphores to control where to run
+
+semaphore_path: If above is Y this is required. The path in zookeeper where the semaphore will be created
