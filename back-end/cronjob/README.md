@@ -11,10 +11,11 @@ CronJobManager is a framework for easy configuration and management of cron sche
 
 ###CronJobManager
 
-CronJobManager does the bulk of the work in configuring and setting up the jobs. On service startup it finds all CronEnabledJob annotated method and reads the configuration from the database. It sets up CronJobRunnables that schedule themselves to be run based on the cron provided. It also provides the support for CRUD operations on the cron jobs.
+CronJobManager does the bulk of the work in configuring and setting up the jobs. On service startup it finds all CronEnabledJob annotated methods and reads the configuration from the database. It sets up CronJobRunnables that schedule themselves to be run based on the cron provided. It also provides the support for CRUD operations on the cron jobs.
 
-###What's Supported
+###What's Supported on a CronJob
 Each cron job can have the following properties:
+
 key: Unique identifier for the cron job
 
 spring_profile_regex: A regex that specifies what environments the cron job should run in. Eg .* for everything or production|stage for production and stage.
